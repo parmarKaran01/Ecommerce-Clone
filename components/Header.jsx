@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import logo from "../Images/applelogowhite.png";
 import Link from "next/link";
@@ -9,10 +9,12 @@ import {
 } from "@heroicons/react/24/outline";
 import { useSelector } from "react-redux";
 import { cartState } from "../reduxToolkit/cartSlice";
+import SearchComponent from "./SearchComponent";
 
 function Header() {
   const session = false;
   const cartProducts = useSelector(cartState);
+  const [showSearch, setShowSearch] = useState(false)
   return (
     <header className="h-14 w-full sticky z-30 top-0 flex justify-between items-center bg-[#323332] text-white ">
       <div className=" w-1/5 flex justify-center items-center">
@@ -23,7 +25,10 @@ function Header() {
         </div>
       </div>
 
-      <div className="hidden flex-1 items-center justify-center md:flex">
+
+
+
+      { showSearch === false ? (<div className="hidden flex-1 items-center justify-center md:flex">
         <Link href="/store">
           <p className="text-xs mr-10 cursor-pointer">Store</p>
         </Link>
@@ -43,10 +48,17 @@ function Header() {
         <a className="text-xs mr-10 cursor-pointer">ipad</a>
         <a className="text-xs mr-10 cursor-pointer">iPhone</a>
         <a className="text-xs mr-10 cursor-pointer">Support</a> */}
-      </div>
+      </div>) : (
+        <SearchComponent showSearch={showSearch} setShowSearch={setShowSearch}/>
+      )}
+      
 
       <div className="w-1/5 flex items-center justify-center ">
+        <button onClick={() => [
+          setShowSearch(true)
+        ]}>
         <MagnifyingGlassIcon className="h-5 w-5 mr-10 cursor-pointer" />
+        </button>
         <Link href="/cart">
           <ShoppingBagIcon className="h-5 w-5 mr-10 cursor-pointer" />
         </Link>
