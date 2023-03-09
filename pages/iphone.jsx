@@ -1,24 +1,28 @@
 import ProductCard from "../components/ProductCard"
 export default function iphone({ data }){
     return(
-        <div className="w-full h-full grid grid-cols-1 gap-5 px-12 mt-10 place-items-center md:grid-cols-2 lg:grid-cols-3">
-            {data.map((item) => {
+        <>
+      <div className="w-full h-full grid grid-cols-1 gap-5 px-12 mt-10 place-items-center md:grid-cols-2 lg:grid-cols-3 ">
+        {/* {mainData.map((item) => {
                 return <ProductCard item={item} key={item.id}/>
             })}
-        </div>
+     */}
+
+        {Object.entries(data?.items).map(([key, value]) => value).map((item) => {
+          return <ProductCard item={item} key={item.id} />;
+        })}
+      </div>
+    </>
     )
 }
 
 
 export async function getServerSideProps(){
-    const res = await fetch("https://api.pujakaitem.com/api/products")
+    const res = await fetch("https://www.apple.com/us/shop/mcm/product-price?parts=IPHONE14_MAIN,IPHONE14PRO_MAIN,IPHONESE3_MAIN,IPHONE13_MAIN")
     const data = await res.json()
-    const ipads = data.filter((item) => {
-        return item.category === "mobile"
-    })
     return {
         props:{
-            data:ipads
+            data:data
         }
     }
 }

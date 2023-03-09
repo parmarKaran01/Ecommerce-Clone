@@ -10,11 +10,12 @@ import {
 import { useSelector } from "react-redux";
 import { cartState } from "../reduxToolkit/cartSlice";
 import SearchComponent from "./SearchComponent";
+import { Badge } from "@mui/material";
 
 function Header() {
   const session = false;
   const cartProducts = useSelector(cartState);
-  const [showSearch, setShowSearch] = useState(false)
+  const [showSearch, setShowSearch] = useState(false);
   return (
     <header className="h-14 w-full sticky z-30 top-0 flex justify-between items-center bg-[#323332] text-white ">
       <div className=" w-1/5 flex justify-center items-center">
@@ -25,45 +26,43 @@ function Header() {
         </div>
       </div>
 
-
-
-
-      { showSearch === false ? (<div className="hidden flex-1 items-center justify-center md:flex">
-        <Link href="/store">
-          <p className="text-xs mr-10 cursor-pointer">Store</p>
-        </Link>
-        <Link href="/mac">
-          <p className="text-xs mr-10 cursor-pointer">Mac</p>
-        </Link>
-        <Link href="/ipad">
-          <p className="text-xs mr-10 cursor-pointer">iPad</p>
-        </Link>
-        <Link href="/iphone">
-          <p className="text-xs mr-10 cursor-pointer">iPhone</p>
-        </Link>
-        <Link href="/support">
-          <p className="text-xs mr-10 cursor-pointer">Support</p>
-        </Link>
-        {/* <a className="text-xs mr-10 cursor-pointer">Mac</a>
-        <a className="text-xs mr-10 cursor-pointer">ipad</a>
-        <a className="text-xs mr-10 cursor-pointer">iPhone</a>
-        <a className="text-xs mr-10 cursor-pointer">Support</a> */}
-      </div>) : (
-        <SearchComponent showSearch={showSearch} setShowSearch={setShowSearch}/>
+      {showSearch === false ? (
+        <div className="hidden flex-1 items-center justify-center md:flex">
+          <Link href="/store">
+            <p className="text-xs mr-10 cursor-pointer">Store</p>
+          </Link>
+          <Link href="/mac">
+            <p className="text-xs mr-10 cursor-pointer">Mac</p>
+          </Link>
+          <Link href="/ipad">
+            <p className="text-xs mr-10 cursor-pointer">iPad</p>
+          </Link>
+          <Link href="/iphone">
+            <p className="text-xs mr-10 cursor-pointer">iPhone</p>
+          </Link>
+          <Link href="/support">
+            <p className="text-xs mr-10 cursor-pointer">Support</p>
+          </Link>
+        </div>
+      ) : (
+        <SearchComponent
+          showSearch={showSearch}
+          setShowSearch={setShowSearch}
+        />
       )}
-      
 
       <div className="w-1/5 flex items-center justify-center ">
-        <button onClick={() => [
-          setShowSearch(true)
-        ]}>
-        <MagnifyingGlassIcon className="h-5 w-5 mr-10 cursor-pointer" />
+        <button onClick={() => [setShowSearch(true)]}>
+          <MagnifyingGlassIcon className="h-5 w-5 mr-10 cursor-pointer" />
         </button>
         <Link href="/cart">
-          <ShoppingBagIcon className="h-5 w-5 mr-10 cursor-pointer" />
+          <div className="h-5 w-5 mr-10 cursor-pointer flex align-baseline">
+            <Badge badgeContent={cartProducts.length} color="primary" className="h-5 w-5">
+              <ShoppingBagIcon />
+            </Badge>
+          </div>
         </Link>
 
-        {cartProducts.length}
         {session ? (
           //add image here
           <span>image</span>

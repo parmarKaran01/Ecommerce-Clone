@@ -2,9 +2,10 @@ import React, { useEffect } from "react";
 import Image from "next/image";
 import iphone from "../Images/Iphone14.jpg";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
-import Card from "./Card";
+
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts, productState } from "../reduxToolkit/productSlice";
+import CardComponent from "./CardComponent";
 
 function Landing() {
   const {data, status} = useSelector(productState)
@@ -40,10 +41,10 @@ function Landing() {
     </section>
 
     <section className="h-full text-white grid grid-cols-2 grid-rows-2 place-items-center gap-10 m-5">
-      <Card title="iPhone 14 Pro" content="Pro. Beyond."/>
-      <Card title="iPad" content="Lovable. Drawable. Magical."/>
-      <Card title="Airpods" content="Share the joy."/>
-      <Card title="MacBook Air" content="Dont take it lightly."/>
+      <CardComponent title="iPhone 14 Pro" content="Pro. Beyond."/>
+      <CardComponent title="iPad" content="Lovable. Drawable. Magical."/>
+      <CardComponent title="Airpods" content="Share the joy."/>
+      <CardComponent title="MacBook Air" content="Dont take it lightly."/>
     </section>
     </>
   );
